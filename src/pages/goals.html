@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Objetivos - FLUXI</title>
+
+    <!-- Fonte e ícones -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <!-- Theme Service (carregar primeiro para evitar flash) -->
+    <script src="../../js/services/theme.service.js"></script>
+
+    <link rel="stylesheet" href="../styles/dashboard.css" />
+    <link rel="stylesheet" href="../styles/theme-dark.css" />
+    <link rel="stylesheet" href="../styles/goals.css" />
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">Fluxi</div>
+            <nav>
+                <a href="dashboard.html">
+                    <span class="material-icons-outlined">dashboard</span>
+                    Panorama
+                </a>
+                <a href="transactions.html"><span class="material-icons-outlined">sync_alt</span>Lançamentos</a>
+                <a class="active" href="goals.html"><span class="material-icons-outlined">flag</span>Objetivos</a>
+                <a href="profile.html"><span class="material-icons-outlined">person</span>Perfil</a>
+                <a href="about.html"><span class="material-icons-outlined">info</span>Sobre</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="settings.html"><span class="material-icons-outlined">settings</span>Configurações</a>
+                <a href="#" class="logout"><span class="material-icons-outlined">logout</span>Sair</a>
+            </div>
+        </aside>
+
+        <!-- Conteúdo principal -->
+        <main class="main-content">
+
+            <header class="topbar">
+                <div class="search-box">
+                    <input type="text" placeholder="Pesquisar..." />
+                    <span class="material-icons-outlined">search</span>
+                </div>
+
+                <div class="user-info">
+                    <span class="material-icons-outlined">notifications</span>
+                    <span class="material-icons-outlined">settings</span>
+                    <div class="user-avatar">
+                        <div class="avatar-icon">
+                            <span class="material-icons-outlined">person</span>
+                        </div>
+                        <div class="avatar-text">
+                            <p class="name">Usuário</p>
+                            <p class="role">Admin</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="goals-section">
+                <div class="goals-header">
+                    <div>
+                        <h2>Meus Objetivos</h2>
+                        <p class="subtitle">Organize e acompanhe suas metas financeiras</p>
+                    </div>
+                    <button class="btn-primary add-goal-btn">
+                        <span class="material-icons-outlined">add</span>
+                        Novo objetivo
+                    </button>
+                </div>
+
+                <!-- Cards de resumo -->
+                <div class="goals-summary">
+                    <div class="summary-card">
+                        <div class="summary-icon" style="background: rgba(92, 63, 214, 0.1);">
+                            <span class="material-icons-outlined" style="color: #5C3FD6;">flag</span>
+                        </div>
+                        <div>
+                            <p class="summary-label">Objetivos Ativos</p>
+                            <p class="summary-value" id="activeGoalsCount">0</p>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="summary-icon" style="background: rgba(103, 229, 210, 0.1);">
+                            <span class="material-icons-outlined" style="color: #67E5D2;">savings</span>
+                        </div>
+                        <div>
+                            <p class="summary-label">Total Guardado</p>
+                            <p class="summary-value" id="totalInGoals">R$ 0,00</p>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="summary-icon" style="background: rgba(16, 185, 129, 0.1);">
+                            <span class="material-icons-outlined" style="color: #10B981;">check_circle</span>
+                        </div>
+                        <div>
+                            <p class="summary-label">Concluídos</p>
+                            <p class="summary-value" id="completedGoalsCount">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filtros -->
+                <div class="goals-filters">
+                    <button class="filter-btn active" data-filter="active">
+                        Ativos
+                    </button>
+                    <button class="filter-btn" data-filter="completed">
+                        Concluídos
+                    </button>
+                    <button class="filter-btn" data-filter="all">
+                        Todos
+                    </button>
+                </div>
+
+                <!-- Lista de objetivos -->
+                <div class="goals-list" id="goalsList">
+                    <!-- Objetivos serão inseridos aqui via JavaScript -->
+                </div>
+
+                <!-- Estado vazio -->
+                <div class="empty-state" id="emptyState" style="display: none;">
+                    <span class="material-icons-outlined">flag</span>
+                    <h3>Nenhum objetivo encontrado</h3>
+                    <p>Crie seu primeiro objetivo e comece a poupar!</p>
+                    <button class="btn-primary add-goal-btn">
+                        <span class="material-icons-outlined">add</span>
+                        Criar objetivo
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../js/config/supabase-config.js"></script>
+    <script src="../../js/services/auth.service.js"></script>
+    <script src="../../js/services/profile.service.js"></script>
+    <script src="../../js/services/transaction.service.js"></script>
+    <script src="../../js/services/goal.service.js"></script>
+    <script src="../../js/components/toast.js"></script>
+    <script src="../../js/components/modal.js"></script>
+    <script src="../../js/goals.js"></script>
+</body>
+
+</html>

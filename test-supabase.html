@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Conexão Supabase - Fluxi</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #5C3FD6;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+        .test-section h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .status {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        .status.pending {
+            background: #FFF3CD;
+            color: #856404;
+        }
+        .status.success {
+            background: #D4EDDA;
+            color: #155724;
+        }
+        .status.error {
+            background: #F8D7DA;
+            color: #721C24;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background: white;
+            border-radius: 6px;
+            border-left: 4px solid #5C3FD6;
+            font-family: monospace;
+            font-size: 13px;
+            white-space: pre-wrap;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        button {
+            background: #5C3FD6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 10px 5px;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #7B61FF;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .summary {
+            margin-top: 30px;
+            padding: 20px;
+            background: #E8F4F8;
+            border-radius: 8px;
+            border-left: 4px solid #0288D1;
+        }
+        .summary h2 {
+            margin-top: 0;
+            color: #0277BD;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Teste de Conexão Supabase</h1>
+        <p class="subtitle">Fluxi - Sistema de Gestão Financeira Pessoal</p>
+
+        <!-- Teste 1: Inicialização -->
+        <div class="test-section">
+            <h3>1. Inicialização do Cliente Supabase <span id="status1" class="status pending">AGUARDANDO</span></h3>
+            <div id="result1" class="result" style="display:none;"></div>
+        </div>
+
+        <!-- Teste 2: Credenciais -->
+        <div class="test-section">
+            <h3>2. Verificação de Credenciais <span id="status2" class="status pending">AGUARDANDO</span></h3>
+            <div id="result2" class="result" style="display:none;"></div>
+        </div>
+
+        <!-- Teste 3: Conexão com Banco -->
+        <div class="test-section">
+            <h3>3. Conexão com Banco de Dados <span id="status3" class="status pending">AGUARDANDO</span></h3>
+            <button onclick="testConnection()">Testar Conexão</button>
+            <div id="result3" class="result" style="display:none;"></div>
+        </div>
+
+        <!-- Teste 4: Estrutura das Tabelas -->
+        <div class="test-section">
+            <h3>4. Verificação de Tabelas <span id="status4" class="status pending">AGUARDANDO</span></h3>
+            <button onclick="testTables()">Verificar Tabelas</button>
+            <div id="result4" class="result" style="display:none;"></div>
+        </div>
+
+        <!-- Teste 5: Políticas RLS -->
+        <div class="test-section">
+            <h3>5. Verificação de Políticas RLS <span id="status5" class="status pending">AGUARDANDO</span></h3>
+            <button onclick="testPolicies()">Verificar Políticas</button>
+            <div id="result5" class="result" style="display:none;"></div>
+        </div>
+
+        <!-- Resumo -->
+        <div class="summary" id="summary" style="display:none;">
+            <h2>📊 Resumo dos Testes</h2>
+            <div id="summaryContent"></div>
+        </div>
+
+        <!-- Botão de Testar Tudo -->
+        <div style="text-align: center; margin-top: 30px;">
+            <button onclick="runAllTests()" style="font-size: 18px; padding: 15px 40px;">
+                🚀 Executar Todos os Testes
+            </button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config/supabase-config.js"></script>
+
+    <script>
+        // ============================================
+        // FUNÇÕES AUXILIARES
+        // ============================================
+
+        function setStatus(testNum, status, message) {
+            const statusEl = document.getElementById(`status${testNum}`)
+            const resultEl = document.getElementById(`result${testNum}`)
+
+            statusEl.className = `status ${status}`
+            statusEl.textContent = status === 'success' ? '✅ SUCESSO' : status === 'error' ? '❌ ERRO' : '⏳ TESTANDO...'
+
+            if (message) {
+                resultEl.style.display = 'block'
+                resultEl.textContent = message
+            }
+        }
+
+        // ============================================
+        // TESTE 1: INICIALIZAÇÃO
+        // ============================================
+
+        setTimeout(() => {
+            if (typeof supabase !== 'undefined' && supabase !== null) {
+                setStatus(1, 'success', 'Cliente Supabase foi inicializado corretamente!\n\nObjeto supabase está disponível globalmente.')
+            } else {
+                setStatus(1, 'error', 'Erro: Cliente Supabase não foi inicializado.\n\nVerifique se o CDN foi carregado e se o arquivo supabase-config.js está correto.')
+            }
+        }, 500)
+
+        // ============================================
+        // TESTE 2: CREDENCIAIS
+        // ============================================
+
+        setTimeout(() => {
+            const url = 'https://oapaprhanosvxpvjhvfk.supabase.co'
+            const key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9hcGFwcmhhbm9zdnhwdmpodmZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE5NzQ3NDAsImV4cCI6MjA3NzU1MDc0MH0.88gPOehq1IthIJZRVzzEuW7HuBUhPKX0inbV69Hxvxs'
+
+            if (SUPABASE_URL === url && SUPABASE_ANON_KEY === key) {
+                setStatus(2, 'success', `✅ Credenciais configuradas:\n\nURL: ${url}\nKey: ${key.substring(0, 50)}...`)
+            } else {
+                setStatus(2, 'error', 'Erro: Credenciais não estão configuradas corretamente.')
+            }
+        }, 600)
+
+        // ============================================
+        // TESTE 3: CONEXÃO COM BANCO
+        // ============================================
+
+        async function testConnection() {
+            setStatus(3, 'pending', 'Testando conexão...')
+
+            try {
+                const { data, error } = await supabase
+                    .from('profiles')
+                    .select('count')
+                    .limit(1)
+
+                if (error) {
+                    setStatus(3, 'error', `Erro ao conectar:\n\n${error.message}\n\n${error.hint || ''}`)
+                } else {
+                    setStatus(3, 'success', '✅ Conexão com banco de dados estabelecida com sucesso!\n\nConseguiu acessar a tabela "profiles".')
+                }
+            } catch (err) {
+                setStatus(3, 'error', `Erro inesperado:\n\n${err.message}`)
+            }
+        }
+
+        // ============================================
+        // TESTE 4: TABELAS
+        // ============================================
+
+        async function testTables() {
+            setStatus(4, 'pending', 'Verificando tabelas...')
+
+            const tables = ['profiles', 'categories', 'transactions', 'goals']
+            const results = []
+
+            for (const table of tables) {
+                try {
+                    const { error } = await supabase
+                        .from(table)
+                        .select('*')
+                        .limit(1)
+
+                    if (error) {
+                        results.push(`❌ ${table}: ${error.message}`)
+                    } else {
+                        results.push(`✅ ${table}: OK`)
+                    }
+                } catch (err) {
+                    results.push(`❌ ${table}: ${err.message}`)
+                }
+            }
+
+            const allSuccess = results.every(r => r.startsWith('✅'))
+
+            if (allSuccess) {
+                setStatus(4, 'success', `Todas as 4 tabelas foram encontradas:\n\n${results.join('\n')}`)
+            } else {
+                setStatus(4, 'error', `Algumas tabelas não foram encontradas:\n\n${results.join('\n')}\n\nExecute o script database/schema.sql no Supabase!`)
+            }
+        }
+
+        // ============================================
+        // TESTE 5: POLÍTICAS RLS
+        // ============================================
+
+        async function testPolicies() {
+            setStatus(5, 'pending', 'Verificando políticas RLS...')
+
+            const tables = ['profiles', 'categories', 'transactions', 'goals']
+            let message = 'Verificação de RLS:\n\n'
+
+            for (const table of tables) {
+                try {
+                    // Tentar fazer SELECT sem autenticação
+                    const { data, error } = await supabase
+                        .from(table)
+                        .select('*')
+                        .limit(1)
+
+                    // Se não houver erro e não houver dados, significa que RLS está funcionando
+                    // (bloqueando acesso não autenticado)
+                    if (!error && (!data || data.length === 0)) {
+                        message += `✅ ${table}: RLS ativo (sem dados para usuário não autenticado)\n`
+                    } else if (!error && data && data.length > 0) {
+                        message += `⚠️ ${table}: Pode ter RLS desabilitado ou você está autenticado\n`
+                    } else {
+                        message += `❌ ${table}: ${error.message}\n`
+                    }
+                } catch (err) {
+                    message += `❌ ${table}: ${err.message}\n`
+                }
+            }
+
+            message += '\n💡 Dica: Para testar RLS completo, faça login e tente acessar dados de outro usuário.'
+
+            setStatus(5, 'success', message)
+        }
+
+        // ============================================
+        // EXECUTAR TODOS OS TESTES
+        // ============================================
+
+        async function runAllTests() {
+            await testConnection()
+            await new Promise(resolve => setTimeout(resolve, 500))
+            await testTables()
+            await new Promise(resolve => setTimeout(resolve, 500))
+            await testPolicies()
+
+            // Mostrar resumo
+            showSummary()
+        }
+
+        function showSummary() {
+            const summary = document.getElementById('summary')
+            const content = document.getElementById('summaryContent')
+
+            const results = []
+            for (let i = 1; i <= 5; i++) {
+                const status = document.getElementById(`status${i}`).textContent
+                results.push(status.includes('✅'))
+            }
+
+            const successCount = results.filter(r => r).length
+            const totalTests = results.length
+
+            content.innerHTML = `
+                <p><strong>Testes Executados:</strong> ${totalTests}</p>
+                <p><strong>Sucessos:</strong> ${successCount}</p>
+                <p><strong>Falhas:</strong> ${totalTests - successCount}</p>
+                <hr>
+                ${successCount === totalTests
+                    ? '<p style="color: green; font-weight: bold;">🎉 Todos os testes passaram! Sua conexão com Supabase está perfeita!</p><p>Você já pode começar a testar o cadastro e login!</p>'
+                    : '<p style="color: orange; font-weight: bold;">⚠️ Alguns testes falharam. Revise os erros acima e corrija antes de continuar.</p>'}
+            `
+
+            summary.style.display = 'block'
+        }
+    </script>
+</body>
+</html>

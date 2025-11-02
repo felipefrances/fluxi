@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meu Perfil - FLUXI</title>
+
+    <!-- Fonte e ícones -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <!-- Theme Service (carregar primeiro para evitar flash) -->
+    <script src="../../js/services/theme.service.js"></script>
+
+    <link rel="stylesheet" href="../styles/dashboard.css" />
+    <link rel="stylesheet" href="../styles/theme-dark.css" />
+    <link rel="stylesheet" href="../styles/profile.css" />
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">Fluxi</div>
+            <nav>
+                <a href="dashboard.html">
+                    <span class="material-icons-outlined">dashboard</span>
+                    Panorama
+                </a>
+                <a href="transactions.html"><span class="material-icons-outlined">sync_alt</span>Lançamentos</a>
+                <a href="goals.html"><span class="material-icons-outlined">flag</span>Objetivos</a>
+                <a class="active" href="profile.html"><span class="material-icons-outlined">person</span>Perfil</a>
+                <a href="about.html"><span class="material-icons-outlined">info</span>Sobre</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="settings.html"><span class="material-icons-outlined">settings</span>Configurações</a>
+                <a href="#" class="logout"><span class="material-icons-outlined">logout</span>Sair</a>
+            </div>
+        </aside>
+
+        <!-- Conteúdo principal -->
+        <main class="main-content">
+
+            <header class="topbar">
+                <div class="search-box">
+                    <input type="text" placeholder="Pesquisar..." />
+                    <span class="material-icons-outlined">search</span>
+                </div>
+
+                <div class="user-info">
+                    <span class="material-icons-outlined">notifications</span>
+                    <span class="material-icons-outlined">settings</span>
+                    <div class="user-avatar">
+                        <div class="avatar-icon">
+                            <span class="material-icons-outlined">person</span>
+                        </div>
+                        <div class="avatar-text">
+                            <p class="name">Usuário</p>
+                            <p class="role">Admin</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="profile-section">
+                <div class="profile-header">
+                    <div>
+                        <h2>Meu Perfil</h2>
+                        <p class="subtitle">Gerencie suas informações pessoais</p>
+                    </div>
+                </div>
+
+                <!-- Profile Card -->
+                <div class="profile-card">
+                    <h3>Informações Pessoais</h3>
+
+                    <!-- Avatar Section -->
+                    <div class="profile-avatar-section">
+                        <div class="profile-avatar" id="avatarContainer">
+                            <img id="avatarPreview" src="" alt="Avatar">
+                            <span class="material-icons-outlined">person</span>
+                            <div class="profile-avatar-overlay">
+                                Alterar foto
+                            </div>
+                        </div>
+                        <input type="file" id="avatarInput" accept="image/*" hidden>
+                        <button class="btn-secondary" type="button" onclick="document.getElementById('avatarInput').click()">
+                            <span class="material-icons-outlined">photo_camera</span>
+                            Alterar foto de perfil
+                        </button>
+                        <p class="avatar-upload-info">
+                            Tamanho máximo: 5MB. Formatos: JPG, PNG, GIF
+                        </p>
+                    </div>
+
+                    <!-- Profile Form -->
+                    <form id="profileForm">
+                        <div class="form-group">
+                            <label for="fullName">Nome completo</label>
+                            <input type="text" id="fullName" name="fullName" required placeholder="Digite seu nome completo">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" readonly>
+                            <small>O email não pode ser alterado</small>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary">
+                                <span class="material-icons-outlined">save</span>
+                                Salvar alterações
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Password Section -->
+                    <div class="password-section">
+                        <h3>Segurança</h3>
+                        <form id="passwordForm">
+                            <div class="form-group">
+                                <label for="newPassword">Nova senha</label>
+                                <input type="password" id="newPassword" name="newPassword" placeholder="Digite a nova senha (mínimo 6 caracteres)">
+                                <small>Deixe em branco para manter a senha atual</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirmar nova senha</label>
+                                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirme a nova senha">
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary">
+                                    <span class="material-icons-outlined">lock</span>
+                                    Alterar senha
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../js/config/supabase-config.js"></script>
+    <script src="../../js/services/cache.service.js"></script>
+    <script src="../../js/services/auth.service.js"></script>
+    <script src="../../js/services/profile.service.js"></script>
+    <script src="../../js/components/toast.js"></script>
+    <script src="../../js/profile.js"></script>
+</body>
+
+</html>

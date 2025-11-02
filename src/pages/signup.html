@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crie sua conta</title>
+
+    <!-- Fonte Inter e Material Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+
+    <link rel="stylesheet" href="../styles/signup.css" />
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Lado esquerdo -->
+        <div class="image-side">
+            <img src="../assets/singup_image.svg" alt="Imagem ilustrativa de cadastro" />
+        </div>
+
+        <!-- Lado direito -->
+        <div class="form-side">
+            <div class="form-wrapper">
+                <h2>Crie sua conta</h2>
+                <p class="subtitle">
+                    Já possui cadastro? <a href="login.html">Entre na sua conta</a>
+                </p>
+
+                <form id="signupForm">
+                    <div class="input-group">
+                        <label for="email">Seu email</label>
+                        <input type="email" id="email" placeholder="seuemail@exemplo.com" required />
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="name">Nome completo</label>
+                            <input type="text" id="name" placeholder="Nome completo" required />
+                        </div>
+                        <div class="input-group">
+                            <label for="phone">Número para contato</label>
+                            <input type="tel" id="phone" placeholder="Número" required />
+                        </div>
+                    </div>
+
+                    <div class="input-group password-group">
+                        <label for="password">Senha</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="password" placeholder="Senha" required />
+                            <button type="button" class="togglePassword" aria-label="Mostrar senha">
+                                <span class="material-icons-outlined">visibility</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="input-group password-group">
+                        <label for="confirmPassword">Confirme sua senha</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="confirmPassword" placeholder="Senha" required />
+                            <button type="button" class="togglePassword" aria-label="Mostrar senha">
+                                <span class="material-icons-outlined">visibility</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Continuar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../js/config/supabase-config.js"></script>
+    <script src="../../js/services/auth.service.js"></script>
+    <script src="../../js/components/toast.js"></script>
+    <script src="../../js/utils/validator.js"></script>
+    <script src="../../js/signup.js"></script>
+</body>
+
+</html>

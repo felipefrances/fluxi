@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lançamentos - FLUXI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <!-- Theme Service (carregar primeiro para evitar flash) -->
+    <script src="../../js/services/theme.service.js"></script>
+
+    <link rel="stylesheet" href="../styles/dashboard.css" />
+    <link rel="stylesheet" href="../styles/theme-dark.css" />
+    <link rel="stylesheet" href="../styles/transactions.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo">Fluxi</div>
+            <nav>
+                <a href="dashboard.html"><span class="material-icons-outlined">dashboard</span>Panorama</a>
+                <a class="active" href="transactions.html"><span class="material-icons-outlined">sync_alt</span>Lançamentos</a>
+                <a href="goals.html"><span class="material-icons-outlined">flag</span>Objetivos</a>
+                <a href="profile.html"><span class="material-icons-outlined">person</span>Perfil</a>
+                <a href="about.html"><span class="material-icons-outlined">info</span>Sobre</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="settings.html"><span class="material-icons-outlined">settings</span>Configurações</a>
+                <a href="#" class="logout"><span class="material-icons-outlined">logout</span>Sair</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Pesquisar transações..." />
+                    <span class="material-icons-outlined">search</span>
+                </div>
+                <div class="user-info">
+                    <span class="material-icons-outlined">notifications</span>
+                    <span class="material-icons-outlined">settings</span>
+                    <div class="user-avatar">
+                        <div class="avatar-icon">
+                            <span class="material-icons-outlined">person</span>
+                        </div>
+                        <div class="avatar-text">
+                            <p class="name">Usuário</p>
+                            <p class="role">Admin</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="transactions-section">
+                <div class="transactions-header">
+                    <div>
+                        <h2>Lançamentos</h2>
+                        <p class="subtitle">Todas as suas transações financeiras</p>
+                    </div>
+                    <button class="btn-primary add-transaction">
+                        <span class="material-icons-outlined">add</span>
+                        Nova transação
+                    </button>
+                </div>
+
+                <div class="transactions-filters">
+                    <button class="filter-btn active" data-filter="all">Todas</button>
+                    <button class="filter-btn" data-filter="income">Receitas</button>
+                    <button class="filter-btn" data-filter="expense">Despesas</button>
+                </div>
+
+                <div id="transactionsGrouped" class="transactions-grouped"></div>
+
+                <div class="empty-state" id="emptyState" style="display: none;">
+                    <span class="material-icons-outlined">receipt_long</span>
+                    <h3>Nenhuma transação encontrada</h3>
+                    <p>Adicione sua primeira transação para começar!</p>
+                    <button class="btn-primary add-transaction">
+                        <span class="material-icons-outlined">add</span>
+                        Nova transação
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../../js/config/supabase-config.js"></script>
+    <script src="../../js/services/cache.service.js"></script>
+    <script src="../../js/services/auth.service.js"></script>
+    <script src="../../js/services/profile.service.js"></script>
+    <script src="../../js/services/transaction.service.js"></script>
+    <script src="../../js/services/category.service.js"></script>
+    <script src="../../js/components/toast.js"></script>
+    <script src="../../js/components/modal.js"></script>
+    <script src="../../js/transactions.js"></script>
+</body>
+</html>

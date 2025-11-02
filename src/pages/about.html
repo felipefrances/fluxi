@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sobre - FLUXI</title>
+
+    <!-- Fonte e ícones -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <!-- Theme Service (carregar primeiro para evitar flash) -->
+    <script src="../../js/services/theme.service.js"></script>
+
+    <link rel="stylesheet" href="../styles/dashboard.css" />
+    <link rel="stylesheet" href="../styles/theme-dark.css" />
+    <link rel="stylesheet" href="../styles/about.css" />
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">Fluxi</div>
+            <nav>
+                <a href="dashboard.html">
+                    <span class="material-icons-outlined">dashboard</span>
+                    Panorama
+                </a>
+                <a href="transactions.html"><span class="material-icons-outlined">sync_alt</span>Lançamentos</a>
+                <a href="goals.html"><span class="material-icons-outlined">flag</span>Objetivos</a>
+                <a href="profile.html"><span class="material-icons-outlined">person</span>Perfil</a>
+                <a class="active" href="about.html"><span class="material-icons-outlined">info</span>Sobre</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="settings.html"><span class="material-icons-outlined">settings</span>Configurações</a>
+                <a href="#" class="logout"><span class="material-icons-outlined">logout</span>Sair</a>
+            </div>
+        </aside>
+
+        <!-- Conteúdo principal -->
+        <main class="main-content">
+
+            <header class="topbar">
+                <div class="search-box">
+                    <input type="text" placeholder="Pesquisar..." />
+                    <span class="material-icons-outlined">search</span>
+                </div>
+
+                <div class="user-info">
+                    <span class="material-icons-outlined">notifications</span>
+                    <span class="material-icons-outlined">settings</span>
+                    <div class="user-avatar">
+                        <div class="avatar-icon">
+                            <span class="material-icons-outlined">person</span>
+                        </div>
+                        <div class="avatar-text">
+                            <p class="name">Usuário</p>
+                            <p class="role">Admin</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="about-section">
+                <div class="about-header">
+                    <div>
+                        <h2>Sobre o FLUXI</h2>
+                        <p class="subtitle">Sistema de Gestão Financeira Pessoal</p>
+                    </div>
+                </div>
+
+                <!-- Projeto Card -->
+                <div class="about-card project-card">
+                    <div class="card-icon">
+                        <span class="material-icons-outlined">lightbulb</span>
+                    </div>
+                    <h3>O Projeto</h3>
+                    <p class="project-description">
+                        O FLUXI é um projeto de extensão universitária desenvolvido para auxiliar estudantes e jovens
+                        profissionais no controle de suas finanças pessoais. Criado por alunos da disciplina Extensão II
+                        do curso de Análise e Desenvolvimento de Sistemas EAD da UNIFAMETRO, o sistema oferece ferramentas
+                        simples e intuitivas para planejamento financeiro, registro de transações e acompanhamento de objetivos.
+                    </p>
+
+                    <div class="project-highlights">
+                        <div class="highlight-item">
+                            <span class="material-icons-outlined">school</span>
+                            <div>
+                                <strong>Projeto Acadêmico</strong>
+                                <p>Projeto de Extensão 2 - Semestre 2025.2</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <span class="material-icons-outlined">location_on</span>
+                            <div>
+                                <strong>Instituição</strong>
+                                <p>UNIFAMETRO - Fortaleza/CE</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <span class="material-icons-outlined">volunteer_activism</span>
+                            <div>
+                                <strong>Gratuito</strong>
+                                <p>Disponível sem custo para toda a comunidade</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Equipe Card -->
+                <div class="about-card team-card">
+                    <div class="card-icon">
+                        <span class="material-icons-outlined">groups</span>
+                    </div>
+                    <h3>Nossa Equipe</h3>
+                    <p class="team-description">
+                        Desenvolvido com dedicação por alunos da disciplina Extensão II do curso de Análise e Desenvolvimento de Sistemas EAD da UNIFAMETRO
+                    </p>
+
+                    <div class="team-grid">
+                        <div class="team-member">
+                            <span class="material-icons-outlined">person</span>
+                            <p>Antonio Olavo Bezerra Vieira</p>
+                        </div>
+                        <div class="team-member">
+                            <span class="material-icons-outlined">person</span>
+                            <p>Caio Lucas Da Silva Lima</p>
+                        </div>
+                        <div class="team-member">
+                            <span class="material-icons-outlined">person</span>
+                            <p>Sara da Silva Cavalcante</p>
+                        </div>
+                        <div class="team-member">
+                            <span class="material-icons-outlined">person</span>
+                            <p>Felipe Frances Guimarães</p>
+                        </div>
+                        <div class="team-member">
+                            <span class="material-icons-outlined">person</span>
+                            <p>Rivena Nobre Diógenes</p>
+                        </div>
+                        <div class="team-member">
+                            <span class="material-icons-outlined">person</span>
+                            <p>Raphael da Costa Pimenta</p>
+                        </div>
+                        <div class="team-member">
+                            <span class="material-icons-outlined">person</span>
+                            <p>Julio Eduardo Coelho da Silva</p>
+                        </div>
+                        <div class="team-member">
+                            <span class="material-icons-outlined">person</span>
+                            <p>Ítalo Gabriel Silva Miranda</p>
+                        </div>
+                        <div class="team-member">
+                            <span class="material-icons-outlined">person</span>
+                            <p>Marcio Gabriel Lopes de Melo</p>
+                        </div>
+                    </div>
+
+                    <div class="supervisor">
+                        <span class="material-icons-outlined">school</span>
+                        <div>
+                            <strong>Supervisor</strong>
+                            <p>Prof. Abraão Henrique S. Rosal</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Objetivos Card -->
+                <div class="about-card objectives-card">
+                    <div class="card-icon">
+                        <span class="material-icons-outlined">emoji_objects</span>
+                    </div>
+                    <h3>Objetivos</h3>
+                    <ul class="objectives-list">
+                        <li>
+                            <span class="material-icons-outlined">check_circle</span>
+                            Incentivar a comunidade acadêmica e seus familiares a desenvolver hábitos de controle de
+                            gastos e planejamento financeiro pessoal
+                        </li>
+                        <li>
+                            <span class="material-icons-outlined">check_circle</span>
+                            Auxiliar na identificação e superação dos principais problemas enfrentados pela população em
+                            relação à gestão de suas finanças
+                        </li>
+                        <li>
+                            <span class="material-icons-outlined">check_circle</span>
+                            Promover a educação financeira por meio de ferramentas tecnológicas que facilitem o
+                            acompanhamento do orçamento e a tomada de decisões conscientes
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Tecnologias Card -->
+                <div class="about-card tech-card">
+                    <div class="card-icon">
+                        <span class="material-icons-outlined">code</span>
+                    </div>
+                    <h3>Tecnologias</h3>
+                    <p class="tech-description">
+                        Desenvolvido com tecnologias modernas e seguras
+                    </p>
+
+                    <div class="tech-grid">
+                        <div class="tech-item">
+                            <span class="tech-icon">HTML5</span>
+                            <p>Frontend</p>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-icon">CSS3</span>
+                            <p>Estilização</p>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-icon">JS</span>
+                            <p>Interatividade</p>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-icon">
+                                <span class="material-icons-outlined">storage</span>
+                            </span>
+                            <p>Supabase</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- License Card -->
+                <div class="about-card license-card">
+                    <div class="card-icon">
+                        <span class="material-icons-outlined">description</span>
+                    </div>
+                    <h3>Licença e Versão</h3>
+                    <div class="license-info">
+                        <div class="info-row">
+                            <span class="material-icons-outlined">info</span>
+                            <div>
+                                <strong>Versão</strong>
+                                <p>FLUXI v1.0.0 - 2025</p>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <span class="material-icons-outlined">gavel</span>
+                            <div>
+                                <strong>Licença</strong>
+                                <p>MIT License - Uso gratuito e livre</p>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <span class="material-icons-outlined">favorite</span>
+                            <div>
+                                <strong>Open Source</strong>
+                                <p>Disponível gratuitamente para toda a comunidade</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="about-footer">
+                    <p>
+                        <span class="material-icons-outlined">favorite</span>
+                        Desenvolvido com dedicação por alunos da disciplina Extensão II do curso de Análise e Desenvolvimento de Sistemas EAD da UNIFAMETRO
+                    </p>
+                    <p class="footer-year">Fortaleza / CE - 2025</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../js/config/supabase-config.js"></script>
+    <script src="../../js/services/cache.service.js"></script>
+    <script src="../../js/services/auth.service.js"></script>
+    <script src="../../js/services/profile.service.js"></script>
+    <script src="../../js/components/toast.js"></script>
+    <script src="../../js/about.js"></script>
+</body>
+
+</html>
