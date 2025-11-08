@@ -43,8 +43,7 @@
 }
 
 .sidebar .logo {
-    font-weight: 700;
-    font-size: 18px;
+    width: 139px;
     margin-bottom: 48px;
 }
 
@@ -569,7 +568,7 @@
 }
 
 /* Responsivo */
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
     .sidebar {
         display: none;
     }
@@ -596,6 +595,7 @@
 
     .mobile-logo {
         display: block;
+        width: 103px;
     }
 
     .user-avatar {

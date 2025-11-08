@@ -39,9 +39,29 @@ body {
 
 /* Lado esquerdo (imagem) */
 .image-side {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.image-side .logo {
+    position: absolute;
+    top: 24px;
+    left: 32px;
+    width: 100px;
+    height: auto;
+    z-index: 2;
+}
+
+.logo-mobile {
+    display: none;
+    position: absolute;
+    top: 24px;
+    left: 32px;
+    width: 100px;
+    height: auto;
+    z-index: 10;
 }
 
 .image-side img {
@@ -184,7 +204,7 @@ h2 {
     }
 
     .image-side {
-        height: 45vh;
+        display: none;
     }
 
     .form-side {
@@ -194,5 +214,16 @@ h2 {
 
     .form-wrapper {
         max-width: 100%;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    .logo-mobile {
+        display: block;
+        top: 16px;
+        left: 20px;
+        width: 90px;
     }
 }
